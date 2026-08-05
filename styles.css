@@ -1,0 +1,19 @@
+/* غیرقابل انتخاب کردن متن برای المان پیام */
+.message,
+.message * {
+  -webkit-user-select: none; /* Safari, iOS */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* IE/Edge */
+  user-select: none;         /* استاندارد */
+  -webkit-touch-callout: none; /* iOS: غیرفعال کردن callout (کپی/ذخیره) */
+  -webkit-tap-highlight-color: rgba(0,0,0,0); /* حذف هایلایت پیشفرض روی اندروید/iOS */
+  touch-action: manipulation; /* اجازه می‌دهد تاچ‌ها به عنوان تاچ/کلیک تفسیر شوند (و درگیری با gestureها کم می‌شود) */
+}
+
+/* برای تصاویر/صوت و عناصر draggable */
+.message img,
+.message audio {
+  -webkit-user-drag: none;
+  user-drag: none;
+  draggable: false;
+}
