@@ -1,0 +1,14 @@
+{
+  "name": "blackwacker-secure-chat",
+  "description": "Advanced real-time chatroom with AES-256 encryption",
+  "type": "project",
+  "require": {
+    "php": ">=7.4"
+  },
+  "require-dev": {},
+  "scripts": {
+    "post-install-cmd": [
+      "mkdir -p uploads"
+    ]
+  }
+}
