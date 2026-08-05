@@ -1,0 +1,19 @@
+{
+  "php": {
+    "version": "8.1.26",
+    "runtime": "php-8.1.26",
+    "zendRuntimeVersion": "4.1.26"
+  },
+  "ext": [
+    "pdo_mysql",
+    "openssl",
+    "mbstring",
+    "ctype",
+    "json"
+  ],
+  "document_root": ".",
+  "index": "index.php",
+  "apache": {
+    "version": "2.4.58"
+  }
+}
