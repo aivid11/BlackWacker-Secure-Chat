@@ -10,9 +10,9 @@ $db_user = getenv('MYSQLUSER') ?: getenv('DB_USER') ?: 'root';
 $db_pass = getenv('MYSQLPASSWORD') ?: getenv('DB_PASS') ?: '';
 
 // =============== Admin Configuration ===============
-$admin_username = getenv('ADMIN_USERNAME') ?: 'admin';
+$admin_username = getenv('ADMIN_USERNAME') ?: 'amir';
 $admin_display_name = getenv('ADMIN_DISPLAY_NAME') ?: 'مدیر سیستم';
-$admin_password = getenv('ADMIN_PASSWORD') ?: 'Admin@123456';
+$admin_password = getenv('ADMIN_PASSWORD') ?: 'Aa@123456';
 $admin_pinned_username = $admin_username;
 
 // =============== Fonts & UI ===============
