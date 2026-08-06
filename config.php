@@ -2,8 +2,21 @@
 // Railway Configuration - تنظیمات خودکار برای Railway
 // این فایل متغیرهای Environment را بخوانده و تنظیمات را انجام می‌دهد
 
+// =============== Parse connection URLs if provided ===============
+$mysql_url = getenv('MYSQL_URL') ?: getenv('DATABASE_URL') ?: getenv('RAILWAY_DATABASE_URL') ?: getenv('JAWSDB_URL') ?: getenv('CLEARDB_DATABASE_URL') ?: null;
+if ($mysql_url) {
+    $parts = parse_url($mysql_url);
+    if ($parts !== false) {
+        if (isset($parts['host'])) putenv('MYSQLHOST=' . $parts['host']);
+        if (isset($parts['port'])) putenv('MYSQLPORT=' . $parts['port']);
+        if (isset($parts['user'])) putenv('MYSQLUSER=' . $parts['user']);
+        if (isset($parts['pass'])) putenv('MYSQLPASSWORD=' . $parts['pass']);
+        if (isset($parts['path'])) putenv('MYSQLDATABASE=' . ltrim($parts['path'], '/'));
+    }
+}
+
 // =============== Database Configuration ===============
-$db_host = getenv('MYSQLHOST') ?: getenv('DB_HOST') ?: 'localhost';
+$db_host = getenv('MYSQLHOST') ?: getenv('DB_HOST') ?: getenv('RAILWAY_PRIVATE_DOMAIN') ?: 'localhost';
 $db_port = getenv('MYSQLPORT') ?: getenv('DB_PORT') ?: 3306;
 $db_name = getenv('MYSQLDATABASE') ?: getenv('DB_NAME') ?: 'railway';
 $db_user = getenv('MYSQLUSER') ?: getenv('DB_USER') ?: 'root';
@@ -180,14 +193,14 @@ try {
     <style>
         @font-face { font-family: 'AppBold'; src: url('fonts/<?php echo $font_heading; ?>.ttf') format('truetype'); font-weight: bold; }
         * { box-sizing: border-box; font-family: 'AppBold', sans-serif; }
-        body { margin: 0; background: linear-gradient(135deg, #1a0505 0%, #450a0a 100%); color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
+        body { margin: 0; background: linear-gradient(135deg, #1a0505 0%, #450a0a 100%); color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hid[...]
         .ban-container { width: 100%; max-width: 480px; position: relative; z-index: 10; animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
-        .ban-card { background: rgba(50, 0, 0, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 50px 30px; border-radius: 35px; border: 1px solid rgba(239, 68, 68, 0.3); box-shadow: 0 8px 32px rgba(239, 68, 68, 0.1); text-align: center; position: relative; }
-        .ban-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #ef4444, #fca5a5, #ef4444); background-size: 200% 100%; animation: gradientMove 3s ease infinite; border-radius: 35px 35px 0 0; }
+        .ban-card { background: rgba(50, 0, 0, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); padding: 50px 30px; border-radius: 35px; border: 1px solid rgba(239, 68, 68,[...]
+        .ban-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #ef4444, #fca5a5, #ef4444); background-size: 200% 100%; ani[...]
         .icon { font-size: 70px; margin-bottom: 25px; display: inline-block; filter: drop-shadow(0 0 25px rgba(239, 68, 68, 0.6)); animation: pulse 2s infinite; }
         .title { font-size: 28px; font-weight: 900; margin-bottom: 15px; color: #ef4444; letter-spacing: -0.5px; text-shadow: 0 5px 15px rgba(239, 68, 68, 0.3); }
         .desc { font-size: 16px; color: #fca5a5; line-height: 1.8; margin-bottom: 35px; padding: 0 10px; opacity: 0.9; }
-        .ban-badge { background: rgba(239, 68, 68, 0.15); color: #fca5a5; padding: 10px 20px; border-radius: 50px; font-size: 14px; border: 1px solid rgba(239, 68, 68, 0.3); display: inline-block; margin-bottom: 15px; }
+        .ban-badge { background: rgba(239, 68, 68, 0.15); color: #fca5a5; padding: 10px 20px; border-radius: 50px; font-size: 14px; border: 1px solid rgba(239, 68, 68, 0.3); display: inline-block[...]
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
         @keyframes gradientMove { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
